@@ -124,6 +124,7 @@ always_comb begin
             ImmSrcD = 3'b011; // Loai J immediate
             JumpD = 1'b1;
             JALRInstrD = 1'b0;
+			ALUControlD = 4'b0000;
         end
 
         //implementation of I-type (3) instructions (lb, lh, lw, lbu, lhu)

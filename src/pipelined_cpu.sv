@@ -209,7 +209,8 @@ decode decode(
 
 execute_pipeline execute_pipeline(
     // Inputs
-    .clk(clk),  
+    .clk(clk),
+	.reset(reset),
     .flush(FlushExecute),
     .PCD(PCD),
     .PCPlus4D(PCPlus4D),

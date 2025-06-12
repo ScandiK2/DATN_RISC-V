@@ -58,15 +58,13 @@ initial begin
     ram_array[10] = 8'hFE;
     ram_array[11] = 8'hCA;
     
-    // === DỮ LIỆU CHO TEST BYTE ACCESS ===
-    // Địa chỉ 0x0010: Pattern để test lb/lbu
-    ram_array[16] = 8'h7F;  // 127 (positive max)
-    ram_array[17] = 8'h80;  // -128/128 (sign bit test)
-    ram_array[18] = 8'hFF;  // -1/255 (all ones)
-    ram_array[19] = 8'h01;  // 1 (simple positive)
+    // Kiểm tra load/STORE
+    ram_array[16] = 8'h00;  
+    ram_array[17] = 8'h00;  
+    ram_array[18] = 8'h00;  
+    ram_array[19] = 8'h00;  
     
-    // === DỮ LIỆU CHO TEST HALFWORD ACCESS ===
-    // Địa chỉ 0x0020: Pattern để test lh/lhu
+
     ram_array[32] = 8'hFF;  // 0x7FFF (positive max halfword)
     ram_array[33] = 8'h7F;
     ram_array[34] = 8'h00;  // 0x8000 (negative min halfword)
@@ -76,28 +74,21 @@ initial begin
     ram_array[38] = 8'h34;  // 0x1234 (simple pattern)
     ram_array[39] = 8'h12;
     
-    // === VÙNG DÀNH CHO STORE OPERATIONS ===
-    // Địa chỉ 0x0100-0x01FF: Vùng trống để test store
-    // Khởi tạo với pattern dễ nhận biết
     for (int i = 256; i < 512; i++) begin
         ram_array[i] = 8'hAA;  // Pattern ban đầu
     end
     
-    // === DỮ LIỆU CHO ARITHMETIC OPERATIONS ===
-    // Địa chỉ 0x0200: Operands cho các phép toán
-    // Số thứ nhất: 100 (0x64)
     ram_array[512] = 8'h64;
     ram_array[513] = 8'h00;
     ram_array[514] = 8'h00;
     ram_array[515] = 8'h00;
     
-    // Số thứ hai: 50 (0x32)
+
     ram_array[516] = 8'h32;
     ram_array[517] = 8'h00;
     ram_array[518] = 8'h00;
     ram_array[519] = 8'h00;
     
-    // Số thứ ba: -25 (0xFFFFFFE7)
     ram_array[520] = 8'hE7;
     ram_array[521] = 8'hFF;
     ram_array[522] = 8'hFF;

@@ -29,46 +29,45 @@ end
 */
 // Khởi tạo trực tiếp lệnh lưu vào trong bộ nhớ
 initial begin
-	// Instruction 1: addi x1, x0, 5 (0x00500093)
+	// 0x00: addi x1, x0, 5      // x1 = 5
     rom_array[0] = 8'h93; rom_array[1] = 8'h00;
     rom_array[2] = 8'h50; rom_array[3] = 8'h00;
-    
-    // Instruction 2: addi x2, x0, 3 (0x00300113)
+
+    // 0x04: addi x2, x0, 3      // x2 = 3
     rom_array[4] = 8'h13; rom_array[5] = 8'h01;
     rom_array[6] = 8'h30; rom_array[7] = 8'h00;
-    
-    // Instruction 3: add x3, x1, x2 (0x002081b3)
+
+    // 0x08: add x3, x1, x2      // x3 = x1 + x2 = 8
     rom_array[8] = 8'hb3; rom_array[9] = 8'h81;
     rom_array[10] = 8'h20; rom_array[11] = 8'h00;
-    
-    // Instruction 4: sub x4, x3, x2 (0x40218233)
+
+    // 0x0C: sub x4, x3, x2      // x4 = x3 - x2 = 5
     rom_array[12] = 8'h33; rom_array[13] = 8'h82;
     rom_array[14] = 8'h21; rom_array[15] = 8'h40;
-    
-    // Instruction 5: sw x3, 256(x0) (0x10302023)
+
+    // 0x10: sw x3, 16(x0)       // store x3 (8) vào địa chỉ 0x10
     rom_array[16] = 8'h23; rom_array[17] = 8'h20;
-    rom_array[18] = 8'h30; rom_array[19] = 8'h10;
-    
-    // Instruction 6: lw x5, 256(x0) (0x10002283)
+    rom_array[18] = 8'h30; rom_array[19] = 8'h00;
+
+    // 0x14: lw x5, 16(x0)       // load x5 từ địa chỉ 0x10 (expect x5 = 8)
     rom_array[20] = 8'h83; rom_array[21] = 8'h22;
-    rom_array[22] = 8'h00; rom_array[23] = 8'h10;
-    
-    // Instruction 7: beq x3, x5, 8 (0x00518463)
+    rom_array[22] = 8'h00; rom_array[23] = 8'h00;
+
+    // 0x18: beq x3, x5, 8       // nếu x3 == x5 (8 == 8) thì nhảy +8 (tới 0x24)
     rom_array[24] = 8'h63; rom_array[25] = 8'h84;
     rom_array[26] = 8'h51; rom_array[27] = 8'h00;
-    
-    // Instruction 8: addi x6, x0, 99 (0x06300313)
+
+    // 0x1C: addi x6, x0, 99     // x6 = 99 (sẽ bị bỏ qua nếu branch taken)
     rom_array[28] = 8'h13; rom_array[29] = 8'h03;
     rom_array[30] = 8'h30; rom_array[31] = 8'h06;
-    
-    // Instruction 9: addi x7, x0, 100 (0x06400393) - target của branch
+
+    // 0x20: addi x7, x0, 100    // x7 = 100 (target của branch)
     rom_array[32] = 8'h93; rom_array[33] = 8'h03;
     rom_array[34] = 8'h40; rom_array[35] = 8'h06;
-    
-    // Instruction 10: jal x0, -16 (0xff0000ef) - loop back để test
-    rom_array[36] = 8'hef; rom_array[37] = 8'h00;
-    rom_array[38] = 8'h00; rom_array[39] = 8'hff;
-    
+
+    // 0x24: jal x0, -12         // Vòng lặp: nhảy về 0x18 (để test branch loop)
+    rom_array[36] = 8'hef; rom_array[37] = 8'hff;
+    rom_array[38] = 8'hff; rom_array[39] = 8'hff;
 end
 
 

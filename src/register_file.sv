@@ -18,7 +18,7 @@ module register_file #(
 
 logic [DATA_WIDTH-1:0] reg_file [2**ADDRESS_WIDTH-1:0];  
 
-always_ff @(negedge clk or posedge reset) begin
+always_ff @(posedge clk or posedge reset) begin
 	if (reset) begin
 		for (int i = 0; i < 32; i++) reg_file[i] <= 32'd0;
 	end else
